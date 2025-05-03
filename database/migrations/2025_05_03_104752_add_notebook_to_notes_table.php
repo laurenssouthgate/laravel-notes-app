@@ -4,7 +4,6 @@ use App\Models\Notebook;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
 return new class extends Migration
 {
@@ -13,13 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
-            $table->string('title');
-            $table->longText('text');
-            $table->foreignIdFor(User::class);
-            $table->timestamps();
+        Schema::table('notes', function (Blueprint $table) {
+            $table->foreignIdFor(Notebook::class)->nullable();
         });
     }
 
@@ -28,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->dropIfExists('notebook_id');
+        });
     }
 };
