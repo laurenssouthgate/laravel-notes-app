@@ -104,7 +104,7 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        if ($note->user->is(Auth::user())) {
+        if (!$note->user->is(Auth::user())) {
             abort(403);
         }
 

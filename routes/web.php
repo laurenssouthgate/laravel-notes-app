@@ -27,7 +27,7 @@ Route::resource('notebooks', NotebookController::class)->middleware('auth');
 
 Route::prefix('/trashed')->name('trashed.')->middleware('auth')->group(function () {
     Route::get('/', [TrashedNoteController::class, 'index'])->name('index');
-    Route::get('/{note}', [TrashedNoteController::class, 'show'])->name('show');
-    Route::put('/{note}', [TrashedNoteController::class, 'update'])->name('update');
-    Route::delete('/{note}', [TrashedNoteController::class, 'destroy'])->name('destroy');
+    Route::get('/{note}', [TrashedNoteController::class, 'show'])->withTrashed()->name('show');
+    Route::put('/{note}', [TrashedNoteController::class, 'update'])->withTrashed()->name('update');
+    Route::delete('/{note}', [TrashedNoteController::class, 'destroy'])->withTrashed()->name('destroy');
 });

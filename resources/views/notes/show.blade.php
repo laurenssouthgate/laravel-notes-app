@@ -13,7 +13,7 @@
                 {{ $note->notebook->name }}
             </span>
 
-            @if(!$note->isTrashed())
+            @if(!$note->trashed())
             <div class="flex gap-6">
                 <p class="opacity-70"><strong>Created:</strong> {{ $note->created_at->diffForHumans() }}</p>
                 <p class="opacity-70"><strong>Last Updated:</strong> {{ $note->updated_at->diffForHumans() }}</p>
